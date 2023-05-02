@@ -6,10 +6,10 @@ import 'package:news_api_flutter_package/model/article.dart';
 import 'package:news_api_flutter_package/news_api_flutter_package.dart';
 
 class API {
+  static List<Articles> newList = <Articles>[];
   static NewsAPI newsAPI = NewsAPI(Strings.apikey);
-  static List<Article> newList = <Article>[];
 
   static Future<List<Article>> getNews() async {
-    return await newsAPI.getTopHeadlines(country: "in");
+    return await  newsAPI.getTopHeadlines(country: "in");
   }
 }
