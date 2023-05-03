@@ -1,3 +1,4 @@
+/*
 class NewsModel {
   NewsModel({this.status, this.totalResults, this.articles});
 
@@ -7,14 +8,14 @@ class NewsModel {
     if (json['articles'] != null) {
       articles = [];
       json['articles'].forEach((v) {
-        articles!.add(Articles.fromJson(v));
+        articles!.add(ArticlesModel.fromJson(v));
       });
     }
   }
 
   String? status;
   int? totalResults;
-  List<Articles>? articles;
+  List<ArticlesModel>? articles;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -49,8 +50,8 @@ class Source {
   }
 }
 
-class Articles {
-  Articles({
+class ArticlesModel {
+  ArticlesModel({
     this.source,
     this.author,
     this.title,
@@ -61,7 +62,7 @@ class Articles {
     this.content,
   });
 
-  Articles.fromJson(dynamic json) {
+  ArticlesModel.fromJson(dynamic json) {
     source = json['source'] != null ? Source.fromJson(json['source']) : null;
     author = json['author'];
     title = json['title'];
@@ -96,3 +97,4 @@ class Articles {
     return map;
   }
 }
+*/
