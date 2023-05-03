@@ -36,7 +36,6 @@ class _HeadLinePageState extends State<HeadLinePage> {
       ),*/
       appBar: AppBar(title: const Text("Headlines")),
       body: BlocBuilder<HeadlineBloc, HeadlineState>(
-        // bloc: HeadlineBloc(),
         builder: (context, HeadlineState state) {
           if (state is HeadlineLoading) {
             return headLineLoading();

@@ -11,12 +11,7 @@ class NewsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        /* Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => FullNewsDetailsPage(article: article),
-          ),
-        );*/
+        // Navigate to the full news details page
       },
       child: Container(
         height: 300.0,
@@ -25,46 +20,65 @@ class NewsWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(16.0),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 6.0,
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 8.0,
               offset: Offset(0, 3),
             ),
           ],
-          image: DecorationImage(
-            image: NetworkImage(
-              article.urlToImage ??
-                  'https://via.placeholder.com/150x150.png?text=No+Image',
-            ),
-            fit: BoxFit.cover,
-          ),
         ),
-        child: Container(
-          alignment: Alignment.bottomCenter,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16.0),
-            gradient: LinearGradient(
-              colors: [
-                Colors.black.withOpacity(0.9),
-                Colors.black.withOpacity(0.1),
-              ],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16.0),
+              child: Image.network(
+                article.urlToImage ??
+                    'https://via.placeholder.com/150x150.png?text=No+Image',
+                height: 300.0,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              article.title ?? '',
-              style: TextStyle(
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16.0),
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.transparent,
+                    Colors.black.withOpacity(0.8),
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 16.0,
+              left: 16.0,
+              right: 16.0,
+              child: Text(
+                article.title ?? '',
+                style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
-                  overflow: TextOverflow.ellipsis),
-              maxLines: 2,
+                  fontSize: 20.0,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-          ),
+            Positioned(
+              top: 16.0,
+              right: 16.0,
+              child: Icon(
+                Icons.bookmark_border,
+                color: Colors.white,
+                size: 28.0,
+              ),
+            ),
+          ],
         ),
       ),
     );
+
   }
 }
