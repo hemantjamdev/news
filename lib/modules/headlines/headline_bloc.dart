@@ -16,23 +16,16 @@ class HeadlineBloc extends Bloc<HeadlineEvent, HeadlineState> {
   List<Article> newsList = <Article>[];
 
   HeadlineBloc() : super(HeadlineInitial()) {
-    log("-----> bloc called <------");
     on<HeadlineEvent>(
       (event, emit) async {
-        log("-----> on method called <------");
-        log("-----> this is current event ${event.toString()} <------");
         if (event is FetchHeadlines) {
-          log("-----> if called  <------");
           emit(HeadlineLoading());
           newsList = await repo.getHeadLine();
           newsList.isNotEmpty
               ? emit(HeadlineLoaded(articles: newsList))
               : emit(HeadlineLoading());
-        } else {
-          log("-----> else called <------");
         }
       },
     );
-    log("-----> bloc finished <------");
   }
 }

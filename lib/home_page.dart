@@ -2,7 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news/modules/category/category_page.dart';
+import 'package:news/modules/category/category_bloc.dart';
+import 'package:news/modules/category/category_list_page.dart';
 import 'package:news/modules/headlines/headline_bloc.dart';
 import 'package:news/modules/headlines/headline_page.dart';
 
@@ -34,19 +35,23 @@ class _HomePageState extends State<HomePage>
       body: TabBarView(
           controller: tabController,
           children: [
-        BlocProvider<HeadlineBloc>(
-          create: (context) => HeadlineBloc(),
-          child: const HeadLinePage(),
-        ),
-            CategoryPage()
-      ]),
+            BlocProvider<HeadlineBloc>(
+              create: (context) => HeadlineBloc(),
+              child: const HeadLinePage(),
+            ),
+            BlocProvider<CategoryBloc>(
+              create: (context) => CategoryBloc(),
+              child: CategoryPage(),
+            )
+          ]),
       bottomNavigationBar: TabBar(
         controller: tabController,
         tabs: [
-          Tab(
+          Tab(icon: Icon(Icons.home),
             child: Text("home"),
           ),
           Tab(
+            icon: Icon(Icons.category),
             child: Text("cate"),
           ),
         ],

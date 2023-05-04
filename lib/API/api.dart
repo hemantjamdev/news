@@ -9,4 +9,7 @@ class API {
   static Future getNews() async {
     return await newsAPI.getTopHeadlines(country: "in");
   }
+  static Future getSourceList({required String cateName}) async {
+    return await newsAPI.getSources(category:"in");
+  }
 }
