@@ -44,6 +44,7 @@ class _HeadLinePageState extends State<HeadLinePage> {
                 itemCount: state.articles.length,
                 itemBuilder: (context, int index) {
                   Article news = state.articles[index];
+
                   return NewsWidget(article: news);
                 });
           } else {
