@@ -13,7 +13,8 @@ part 'category_state.dart';
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   CategoryProvider repo = CategoryProvider();
   List<Article> newsList = <Article>[];
-List<Source>sourceList=<Source>[];
+  List<Source> sourceList = <Source>[];
+
   CategoryBloc() : super(CategoryInitial()) {
     on<CategoryEvent>(
       (event, emit) async {
@@ -23,9 +24,9 @@ List<Source>sourceList=<Source>[];
           newsList.isNotEmpty
               ? emit(CategoryLoaded(articles: newsList))
               : emit(CategoryLoading());
-        }else if(event is FetchSourcesList){
+        } else if (event is FetchSourcesList) {
           emit(SourceLoading());
-          sourceList=await repo.
+        //  sourceList = await repo.getSourceList("cateName");
         }
       },
     );

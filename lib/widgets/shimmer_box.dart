@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-Widget loading([double height = 300, double width = 300]) {
+Widget loading() {
   return Shimmer(
     gradient: LinearGradient(
       colors: [
@@ -13,40 +13,59 @@ Widget loading([double height = 300, double width = 300]) {
       end: Alignment(1.0, 0.5),
       stops: [0.0, 0.5, 1.0],
     ),
+    child: Stack(
+      children: [
 
-    child: Container(
-      height: height,
-      margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 6.0,
-            offset: Offset(0, 3),
+        Positioned(
+          bottom: 10.0,
+          child: Container(
+            padding: EdgeInsets.all(10),
+            alignment: Alignment.bottomCenter,
+            width: 350,
+            height: 200,
+            decoration: BoxDecoration(
+              /*gradient: LinearGradient(
+                colors: [Colors.transparent, Colors.black.withOpacity(0.9)],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),*/
+              color: Colors.grey.withOpacity(0.4),
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(40),
+                topLeft: Radius.circular(40),
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10),
+              ),
+            ),
+
           ),
-        ],
-        image: DecorationImage(
-          image: NetworkImage(
-            'https://via.placeholder.com/150x150.png?text=No+Image',
-          ),
-          fit: BoxFit.cover,
         ),
-      ),
-      child: Container(
-        alignment: Alignment.bottomCenter,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.0),
-          gradient: LinearGradient(
-            colors: [
-              Colors.black.withOpacity(0.9),
-              Colors.black.withOpacity(0.1),
+        Container(
+          height: 500,
+          width: 300,
+          margin: EdgeInsets.only(bottom: 70, top: 10, left: 20, right: 30),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.5),
+                blurRadius: 10.0,
+                offset: Offset(0, 10),
+              ),
             ],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16.0),
+            child: Image.network(
+              'https://via.placeholder.com/150x150.png?text=No+Image',
+              height: 300.0,
+              width: 300,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
-      ),
+
+      ],
     ),
   );
 }

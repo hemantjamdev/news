@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news/routes.dart';
 
 import 'home_page.dart';
 
@@ -8,8 +9,9 @@ class NewsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      onGenerateRoute: Routes.onRouteGenerate,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(brightness: Brightness.dark),
+      theme: ThemeData(brightness: Brightness.light),
       home: HomePage(),
     );
   }

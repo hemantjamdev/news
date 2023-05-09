@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/modules/category/category_bloc.dart';
+import 'package:news/widgets/shimmer_box.dart';
 import 'package:news_api_flutter_package/model/article.dart';
-
-import '../../widgets/headline_loading.dart';
 import '../../widgets/news_widget.dart';
 
 class CategoryDetails extends StatelessWidget {
@@ -14,27 +13,50 @@ class CategoryDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<CategoryBloc>(context).add(FetchCategoryDetails(categoryName));
+    BlocProvider.of<CategoryBloc>(context)
+        .add(FetchCategoryDetails(categoryName));
     return Scaffold(
       appBar: AppBar(title: Text(categoryName)),
-      body: BlocBuilder<CategoryBloc, CategoryState>(
-        builder: (context, CategoryState state) {
-          if (state is CategoryLoaded) {
-            return ListView.builder(
-              itemCount: state.articles.length,
-              itemBuilder: (context, int index) {
-                Article news = state.articles[index];
-                return NewsWidget(article: news);
-              },
-            );
-          } else if (state is CategoryLoading) {
-            return headLineLoading();
-          } else {
-            return const Center(
-              child: Text("something went wrong ! please try again"),
-            );
-          }
-        },
+      body: Column(
+        children: [
+          Container(color: Colors.amber, height: 100, width: double.infinity),
+          BlocBuilder<CategoryBloc, CategoryState>(
+            builder: (context, CategoryState state) {
+              if (state is CategoryLoading) {
+                return Expanded(
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 5,
+                      itemBuilder: (context, int index) {
+                        return loading();
+                      }),
+                );
+              } else if (state is CategoryLoaded) {
+                return Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 50),
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: state.articles.length,
+                        itemBuilder: (context, int index) {
+                          Article news = state.articles[index];
+                          return NewsWidget(
+                            article: news,
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                          );
+                        }),
+                  ),
+                );
+              } else {
+                return Expanded(
+                  child: const Center(
+                      child: Text("something went wrong ! please try again")),
+                );
+              }
+            },
+          ),
+        ],
       ),
     );
   }

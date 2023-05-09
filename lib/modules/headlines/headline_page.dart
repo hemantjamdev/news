@@ -8,6 +8,7 @@ import 'package:news/widgets/headline_loading.dart';
 import 'package:news_api_flutter_package/model/article.dart';
 
 import '../../widgets/news_widget.dart';
+import '../../widgets/shimmer_box.dart';
 
 class HeadLinePage extends StatefulWidget {
   const HeadLinePage({Key? key}) : super(key: key);
@@ -19,7 +20,6 @@ class HeadLinePage extends StatefulWidget {
 class _HeadLinePageState extends State<HeadLinePage> {
   @override
   void initState() {
-    //  log("-----> headline page called <------");
     super.initState();
   }
 
@@ -28,30 +28,44 @@ class _HeadLinePageState extends State<HeadLinePage> {
     BlocProvider.of<HeadlineBloc>(context).add(FetchHeadlines());
     log("-----> headline page called <------");
     return Scaffold(
-      /*floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          HeadlineBloc bloc = HeadlineBloc();
-          bloc.add(FetchHeadlines());
-        },
-      ),*/
       appBar: AppBar(title: const Text("Headlines")),
-      body: BlocBuilder<HeadlineBloc, HeadlineState>(
-        builder: (context, HeadlineState state) {
-          if (state is HeadlineLoading) {
-            return headLineLoading();
-          } else if (state is HeadlineLoaded) {
-            return ListView.builder(
-                itemCount: state.articles.length,
-                itemBuilder: (context, int index) {
-                  Article news = state.articles[index];
-
-                  return NewsWidget(article: news);
-                });
-          } else {
-            return const Center(
-                child: Text("something went wrong ! please try again"));
-          }
-        },
+      body: Column(
+        children: [
+          Container(color: Colors.amber, height: 100, width: double.infinity),
+          BlocBuilder<HeadlineBloc, HeadlineState>(
+            builder: (context, HeadlineState state) {
+              if (state is HeadlineLoading) {
+                return Expanded(
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 5,
+                      itemBuilder: (context, int index) {
+                        return loading();
+                      }),
+                );
+              } else if (state is HeadlineLoaded) {
+                return Expanded(
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: state.articles.length,
+                      itemBuilder: (context, int index) {
+                        Article news = state.articles[index];
+                        return NewsWidget(
+                          article: news,
+                          height: MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width,
+                        );
+                      }),
+                );
+              } else {
+                return const Expanded(
+                  child: Center(
+                      child: Text("something went wrong ! please try again")),
+                );
+              }
+            },
+          ),
+        ],
       ),
     );
   }

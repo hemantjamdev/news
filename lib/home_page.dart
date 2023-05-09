@@ -32,18 +32,17 @@ class _HomePageState extends State<HomePage>
           onPressed: API.getNews,
         ),*/
       //  appBar: AppBar(title: const Text("news")),
-      body: TabBarView(
-          controller: tabController,
-          children: [
-            BlocProvider<HeadlineBloc>(
-              create: (context) => HeadlineBloc(),
-              child: const HeadLinePage(),
-            ),
-            BlocProvider<CategoryBloc>(
-              create: (context) => CategoryBloc(),
-              child: CategoryPage(),
-            )
-          ]),
+      body: SafeArea(
+        child: TabBarView(
+            controller: tabController,
+            children: [
+              BlocProvider<HeadlineBloc>(
+                create: (context) => HeadlineBloc(),
+                child: const HeadLinePage(),
+              ),
+              CategoryPage()
+            ]),
+      ),
       bottomNavigationBar: TabBar(
         controller: tabController,
         tabs: [
@@ -52,7 +51,7 @@ class _HomePageState extends State<HomePage>
           ),
           Tab(
             icon: Icon(Icons.category),
-            child: Text("cate"),
+            child: Text("category"),
           ),
         ],
       ),
