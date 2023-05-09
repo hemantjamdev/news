@@ -37,6 +37,8 @@ class CategoryPage extends StatelessWidget {
       ),
       backgroundColor: AppColors.grey,
       body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.all(5),
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -50,11 +52,8 @@ class CategoryPage extends StatelessWidget {
                 left: right[i],
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      "/categoryDetails",
-                      arguments: categories[i],
-                    );
+                    Navigator.pushNamed(context, "/categoryDetails",
+                        arguments: categories[i]);
                   },
                   child: Container(
                     width: 150,
