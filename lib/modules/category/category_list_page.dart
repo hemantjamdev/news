@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news/modules/category/category_bloc.dart';
-import 'package:news/modules/category/category_detail.dart';
+import 'package:news/constants/colors.dart';
 
 class CategoryPage extends StatelessWidget {
+  CategoryPage({super.key});
+
   final List<String> categories = [
     "All",
     'Business',
@@ -14,44 +14,34 @@ class CategoryPage extends StatelessWidget {
     'Sports',
     'Technology',
   ];
-
-  /*business
-  entertainment
-  general
-  health
-  science
-  sports
-  technology*/
   final List<double> top = [10, 5, 150, 165, 310, 350, 520, 530];
   final List<double> right = [10, 250, 80, 250, 20, 200, 40, 200];
   final List<Color> colors = [
-    Colors.red,
-    Colors.green,
-    Colors.blue,
-    Colors.orange,
-    Colors.purple,
-    Colors.black38,
-    Colors.teal,
-    Colors.greenAccent,
+    AppColors.red,
+    AppColors.green,
+    AppColors.blue,
+    AppColors.orange,
+    AppColors.purple,
+    AppColors.black38,
+    AppColors.teal,
+    AppColors.greenAccent,
   ];
-
-  CategoryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.grey,
-        title: Text("Categories"),
+        backgroundColor: AppColors.grey,
+        title: const Text("Categories"),
       ),
-      backgroundColor: Colors.grey,
+      backgroundColor: AppColors.grey,
       body: Container(
         margin: const EdgeInsets.all(5),
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(10)),
-            color: Colors.grey,
-            border: Border.all(color: Colors.black, width: 3)),
+            color: AppColors.grey,
+            border: Border.all(color: AppColors.black, width: 3)),
         child: Stack(
           children: [
             for (int i = 0; i < categories.length; i++)
@@ -77,7 +67,7 @@ class CategoryPage extends StatelessWidget {
                       child: Text(
                         categories[i],
                         style: const TextStyle(
-                          color: Colors.white,
+                          color: AppColors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 20.0,
                         ),

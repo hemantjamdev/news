@@ -10,3 +10,10 @@ class FetchCategoryDetails extends CategoryEvent {
 }
 
 class FetchSourcesList extends CategoryEvent {}
+
+class SearchCategory extends CategoryEvent {
+  final String query;
+  final String category;
+
+  SearchCategory(this.query, this.category);
+}

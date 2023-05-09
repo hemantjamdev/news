@@ -1,7 +1,5 @@
-import 'dart:developer';
 
 import 'package:news/constants/strings.dart';
-import 'package:news_api_flutter_package/model/article.dart';
 import 'package:news_api_flutter_package/news_api_flutter_package.dart';
 
 class API {
@@ -27,13 +25,3 @@ class API {
     return await newsAPI.getTopHeadlines(country: "in", category: category);
   }
 }
-/*
-
-business
-entertainment
-general
-health
-science
-sports
-technology
-*/

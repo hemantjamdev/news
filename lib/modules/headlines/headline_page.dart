@@ -1,10 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/modules/headlines/headline_bloc.dart';
-import 'package:news/modules/headlines/news_model.dart';
-import 'package:news/widgets/headline_loading.dart';
 import 'package:news/widgets/search.dart';
 import 'package:news_api_flutter_package/model/article.dart';
 
@@ -27,7 +23,6 @@ class _HeadLinePageState extends State<HeadLinePage> {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<HeadlineBloc>(context).add(FetchHeadlines());
-    log("-----> headline page called <------");
     return Scaffold(
       appBar: AppBar(title: const Text("Headlines")),
       body: Column(

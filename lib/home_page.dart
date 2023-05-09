@@ -1,8 +1,6 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news/modules/category/category_bloc.dart';
 import 'package:news/modules/category/category_list_page.dart';
 import 'package:news/modules/headlines/headline_bloc.dart';
 import 'package:news/modules/headlines/headline_page.dart';
@@ -26,27 +24,21 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    log("-----> home page called <------");
     return Scaffold(
-      /* floatingActionButton: FloatingActionButton(
-          onPressed: API.getNews,
-        ),*/
-      //  appBar: AppBar(title: const Text("news")),
       body: SafeArea(
-        child: TabBarView(
-            controller: tabController,
-            children: [
-              BlocProvider<HeadlineBloc>(
-                create: (context) => HeadlineBloc(),
-                child: const HeadLinePage(),
-              ),
-              CategoryPage()
-            ]),
+        child: TabBarView(controller: tabController, children: [
+          BlocProvider<HeadlineBloc>(
+            create: (context) => HeadlineBloc(),
+            child: const HeadLinePage(),
+          ),
+          CategoryPage()
+        ]),
       ),
       bottomNavigationBar: TabBar(
         controller: tabController,
-        tabs: [
-          Tab(icon: Icon(Icons.home),
+        tabs: const [
+          Tab(
+            icon: Icon(Icons.home),
             child: Text("home"),
           ),
           Tab(

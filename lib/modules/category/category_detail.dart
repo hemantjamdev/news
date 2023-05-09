@@ -4,6 +4,7 @@ import 'package:news/modules/category/category_bloc.dart';
 import 'package:news/widgets/shimmer_box.dart';
 import 'package:news_api_flutter_package/model/article.dart';
 import '../../widgets/news_widget.dart';
+import '../../widgets/search.dart';
 
 class CategoryDetails extends StatelessWidget {
   final String categoryName;
@@ -16,10 +17,15 @@ class CategoryDetails extends StatelessWidget {
     BlocProvider.of<CategoryBloc>(context)
         .add(FetchCategoryDetails(categoryName));
     return Scaffold(
-      appBar: AppBar(title: Text(categoryName)),
+      appBar: AppBar(title: Text(categoryName.toUpperCase())),
       body: Column(
         children: [
-          Container(color: Colors.amber, height: 100, width: double.infinity),
+          Search(
+            onSearch: (query) {
+              BlocProvider.of<CategoryBloc>(context).add(SearchCategory(
+                  query, categoryName == "All" ? "general" : categoryName));
+            },
+          ),
           BlocBuilder<CategoryBloc, CategoryState>(
             builder: (context, CategoryState state) {
               if (state is CategoryLoading) {
@@ -49,8 +55,8 @@ class CategoryDetails extends StatelessWidget {
                   ),
                 );
               } else {
-                return Expanded(
-                  child: const Center(
+                return const Expanded(
+                  child: Center(
                       child: Text("something went wrong ! please try again")),
                 );
               }

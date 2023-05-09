@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +25,12 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
               : emit(CategoryLoading());
         } else if (event is FetchSourcesList) {
           emit(SourceLoading());
-        //  sourceList = await repo.getSourceList("cateName");
+        } else if (event is SearchCategory) {
+          emit(CategoryLoading());
+          newsList = await repo.search(event.query, event.category);
+          newsList.isNotEmpty
+              ? emit(CategoryLoaded(articles: newsList))
+              : emit(CategoryLoading());
         }
       },
     );
