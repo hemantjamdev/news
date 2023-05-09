@@ -24,6 +24,13 @@ class HeadlineBloc extends Bloc<HeadlineEvent, HeadlineState> {
           newsList.isNotEmpty
               ? emit(HeadlineLoaded(articles: newsList))
               : emit(HeadlineLoading());
+        } else if (event is SearchHeadlines) {
+         // newsList.clear();
+          emit(HeadlineLoading());
+          newsList = await repo.search(event.query, event.category);
+          newsList.isNotEmpty
+              ? emit(HeadlineLoaded(articles: newsList))
+              : emit(HeadlineLoading());
         }
       },
     );

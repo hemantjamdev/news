@@ -10,4 +10,9 @@ class HeadlineProvider {
   Future<List<Article>> getHeadLine() async {
     return newsList = await API.getNews();
   }
+
+  Future<List<Article>> search(String query, String category) async {
+    //newsList.clear();
+    return newsList = await API.search(query, category);
+  }
 }

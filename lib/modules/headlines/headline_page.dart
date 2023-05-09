@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/modules/headlines/headline_bloc.dart';
 import 'package:news/modules/headlines/news_model.dart';
 import 'package:news/widgets/headline_loading.dart';
+import 'package:news/widgets/search.dart';
 import 'package:news_api_flutter_package/model/article.dart';
 
 import '../../widgets/news_widget.dart';
@@ -31,7 +32,12 @@ class _HeadLinePageState extends State<HeadLinePage> {
       appBar: AppBar(title: const Text("Headlines")),
       body: Column(
         children: [
-          Container(color: Colors.amber, height: 100, width: double.infinity),
+          Search(
+            onSearch: (query) {
+              BlocProvider.of<HeadlineBloc>(context)
+                  .add(SearchHeadlines(query, "general"));
+            },
+          ),
           BlocBuilder<HeadlineBloc, HeadlineState>(
             builder: (context, HeadlineState state) {
               if (state is HeadlineLoading) {
@@ -58,10 +64,8 @@ class _HeadLinePageState extends State<HeadLinePage> {
                       }),
                 );
               } else {
-                return const Expanded(
-                  child: Center(
-                      child: Text("something went wrong ! please try again")),
-                );
+                return const Center(
+                    child: Text("something went wrong ! please try again"));
               }
             },
           ),

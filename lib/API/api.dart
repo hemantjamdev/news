@@ -8,8 +8,14 @@ class API {
   static NewsAPI newsAPI = NewsAPI(Strings.apikey);
 
   static Future getNews() async {
+    return await newsAPI.getTopHeadlines(country: "in");
+  }
+
+  static Future search(String query, String category) async {
     return await newsAPI.getTopHeadlines(
       country: "in",
+      query: query,
+      category: category,
     );
   }
 
@@ -18,10 +24,7 @@ class API {
   }
 
   static Future getCategoryNews(String category) async {
-    return await newsAPI.getTopHeadlines(
-      country: "in",
-      category: category,
-    );
+    return await newsAPI.getTopHeadlines(country: "in", category: category);
   }
 }
 /*
