@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/constants/route_name.dart';
+import 'package:news/presentation/full_article.dart';
 import 'package:news/presentation/home_page.dart';
 import 'package:news/modules/category/category_bloc.dart';
 import 'package:news/modules/category/category_detail.dart';
@@ -20,9 +21,10 @@ class Routes {
                   child: const HomePage(),
                 ),
             settings: settings);
-      /*case RouteNames.headLinePage:
+      case RouteNames.fullArticle:
         return MyCustomRoute(
-            builder: (_) => const HeadLinePage(), settings: settings);*/
+            builder: (_) => FullArticle(url: settings.arguments as String),
+            settings: settings);
       case RouteNames.newsDetails:
         return MyCustomRoute(
             builder: (_) => NewsDetails(
