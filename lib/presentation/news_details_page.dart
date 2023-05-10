@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ class NewsDetails extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   handTap(BuildContext context) {
-    log("---------tappeddd--------");
     Navigator.pushNamed(
       context,
       "/fullArticle",

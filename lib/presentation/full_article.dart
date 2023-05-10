@@ -25,7 +25,7 @@ class _FullArticleState extends State<FullArticle> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Container(child: WebViewWidget(controller: controller))),
+          child: WebViewWidget(controller: controller)),
     );
   }
 }

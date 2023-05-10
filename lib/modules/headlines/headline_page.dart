@@ -4,10 +4,7 @@ import 'package:news/modules/headlines/headline_bloc.dart';
 import 'package:news/widgets/new_loading.dart';
 import 'package:news/widgets/news_list.dart';
 import 'package:news/widgets/search.dart';
-import 'package:news_api_flutter_package/model/article.dart';
 
-import '../../widgets/news_widget.dart';
-import '../../widgets/shimmer_box.dart';
 
 class HeadLinePage extends StatefulWidget {
   const HeadLinePage({Key? key}) : super(key: key);
@@ -26,7 +23,7 @@ class _HeadLinePageState extends State<HeadLinePage> {
   Widget build(BuildContext context) {
     BlocProvider.of<HeadlineBloc>(context).add(FetchHeadlines());
     return Scaffold(
-      appBar: AppBar(title: const Text("Headlines")),
+      appBar: AppBar(title: const Text("Top Headlines")),
       body: Column(
         children: [
           Search(

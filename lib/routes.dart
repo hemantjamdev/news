@@ -5,8 +5,7 @@ import 'package:news/presentation/full_article.dart';
 import 'package:news/presentation/home_page.dart';
 import 'package:news/modules/category/category_bloc.dart';
 import 'package:news/modules/category/category_detail.dart';
-import 'package:news/modules/headlines/headline_page.dart';
-import 'package:news/presentation/news_details.dart';
+import 'package:news/presentation/news_details_page.dart';
 import 'package:news_api_flutter_package/model/article.dart';
 
 import 'modules/internet/internet_bloc.dart';
@@ -48,7 +47,7 @@ class MyCustomRoute<T> extends MaterialPageRoute<T> {
   MyCustomRoute(
       {required WidgetBuilder builder, required RouteSettings settings})
       : super(builder: builder, settings: settings);
-  final begin = Offset(0.0, 1.0);
+  final begin = const Offset(0.0, 1.0);
   final end = Offset.zero;
   final curve = Curves.ease;
 
