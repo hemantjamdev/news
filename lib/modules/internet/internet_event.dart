@@ -3,4 +3,5 @@ part of 'internet_bloc.dart';
 @immutable
 abstract class InternetEvent {}
 
-class CheckInternet extends InternetEvent {}
+class InternetLoss extends InternetEvent {}
+class InternetGained extends InternetEvent {}

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/constants/route_name.dart';
-import 'package:news/home_page.dart';
+import 'package:news/presentation/home_page.dart';
 import 'package:news/modules/category/category_bloc.dart';
 import 'package:news/modules/category/category_detail.dart';
 import 'package:news/modules/headlines/headline_page.dart';

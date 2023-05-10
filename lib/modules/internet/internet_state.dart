@@ -4,5 +4,7 @@ part of 'internet_bloc.dart';
 abstract class InternetState {}
 
 class InternetInitial extends InternetState {}
-class InternetGained extends InternetState {}
-class InternetLoss extends InternetState {}
+
+class InternetSuccess extends InternetState {}
+
+class InternetFailure extends InternetState {}
