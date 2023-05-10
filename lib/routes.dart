@@ -6,19 +6,25 @@ import 'package:news/modules/category/category_bloc.dart';
 import 'package:news/modules/category/category_detail.dart';
 import 'package:news/modules/headlines/headline_page.dart';
 
+import 'modules/internet/internet_bloc.dart';
+
 class Routes {
   static Route? onRouteGenerate(RouteSettings settings) {
     switch (settings.name) {
-      case RouteNames.initial:
+      case RouteNames.homepage:
         return MyCustomRoute(
-            builder: (_) => const HomePage(), settings: settings);
+            builder: (_) =>
+                BlocProvider<InternetBloc>(
+                  create: (context) => InternetBloc(),
+                  child: const HomePage(),
+                ), settings: settings);
       case RouteNames.headLinePage:
         return MyCustomRoute(
             builder: (_) => const HeadLinePage(), settings: settings);
-
       case RouteNames.categoryDetails:
         return MyCustomRoute(
-            builder: (_) => BlocProvider<CategoryBloc>(
+            builder: (_) =>
+                BlocProvider<CategoryBloc>(
                   create: (context) => CategoryBloc(),
                   child: CategoryDetails(
                       categoryName: settings.arguments as String),

@@ -44,7 +44,41 @@ class CategoryPage extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(10)),
             color: AppColors.grey,
             border: Border.all(color: AppColors.black, width: 3)),
-        child: Stack(
+        child: GridView.builder(
+            itemCount: 8,
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, "/categoryDetails",
+                        arguments: categories[index]);
+                  },
+                  child: Container(
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 2),
+                      color: colors[index % colors.length],
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Text(
+                        categories[index],
+                        style: const TextStyle(
+                          color: AppColors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            })
+        /*Stack(
           children: [
             for (int i = 0; i < categories.length; i++)
               Positioned(
@@ -76,7 +110,8 @@ class CategoryPage extends StatelessWidget {
                 ),
               ),
           ],
-        ),
+        )*/
+        ,
       ),
     );
   }

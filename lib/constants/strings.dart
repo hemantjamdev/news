@@ -3,4 +3,5 @@ class Strings {
 
   /// asset names
   static const String noInternet = "assets/animation/no_internet.json";
+  static const String splash = "assets/animation/splash.json";
 }
