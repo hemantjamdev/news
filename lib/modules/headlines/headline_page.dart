@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/modules/headlines/headline_bloc.dart';
+import 'package:news/widgets/new_loading.dart';
+import 'package:news/widgets/news_list.dart';
 import 'package:news/widgets/search.dart';
 import 'package:news_api_flutter_package/model/article.dart';
 
@@ -36,27 +38,10 @@ class _HeadLinePageState extends State<HeadLinePage> {
           BlocBuilder<HeadlineBloc, HeadlineState>(
             builder: (context, HeadlineState state) {
               if (state is HeadlineLoading) {
-                return Expanded(
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 5,
-                      itemBuilder: (context, int index) {
-                        return loading();
-                      }),
-                );
+                return const NewsLoading();
               } else if (state is HeadlineLoaded) {
-                return Expanded(
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: state.articles.length,
-                      itemBuilder: (context, int index) {
-                        Article news = state.articles[index];
-                        return NewsWidget(
-                          article: news,
-                          height: MediaQuery.of(context).size.height,
-                          width: MediaQuery.of(context).size.width,
-                        );
-                      }),
+                return NewsList(
+                  articles: state.articles,
                 );
               } else {
                 return const Center(
@@ -69,3 +54,4 @@ class _HeadLinePageState extends State<HeadLinePage> {
     );
   }
 }
+

@@ -43,8 +43,8 @@ class Search extends StatelessWidget {
               end: Alignment.bottomCenter,
             ),
           ),
-          padding: const EdgeInsets.all(10),
-          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(5),
+          margin: const EdgeInsets.all(5),
           child: TextField(
             controller: controller,
             decoration: InputDecoration(

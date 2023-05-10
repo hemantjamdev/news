@@ -5,6 +5,8 @@ import 'package:news/presentation/home_page.dart';
 import 'package:news/modules/category/category_bloc.dart';
 import 'package:news/modules/category/category_detail.dart';
 import 'package:news/modules/headlines/headline_page.dart';
+import 'package:news/presentation/news_details.dart';
+import 'package:news_api_flutter_package/model/article.dart';
 
 import 'modules/internet/internet_bloc.dart';
 
@@ -13,18 +15,23 @@ class Routes {
     switch (settings.name) {
       case RouteNames.homepage:
         return MyCustomRoute(
-            builder: (_) =>
-                BlocProvider<InternetBloc>(
+            builder: (_) => BlocProvider<InternetBloc>(
                   create: (context) => InternetBloc(),
                   child: const HomePage(),
-                ), settings: settings);
-      case RouteNames.headLinePage:
+                ),
+            settings: settings);
+      /*case RouteNames.headLinePage:
         return MyCustomRoute(
-            builder: (_) => const HeadLinePage(), settings: settings);
+            builder: (_) => const HeadLinePage(), settings: settings);*/
+      case RouteNames.newsDetails:
+        return MyCustomRoute(
+            builder: (_) => NewsDetails(
+                  article: settings.arguments as Article,
+                ),
+            settings: settings);
       case RouteNames.categoryDetails:
         return MyCustomRoute(
-            builder: (_) =>
-                BlocProvider<CategoryBloc>(
+            builder: (_) => BlocProvider<CategoryBloc>(
                   create: (context) => CategoryBloc(),
                   child: CategoryDetails(
                       categoryName: settings.arguments as String),
@@ -39,10 +46,15 @@ class MyCustomRoute<T> extends MaterialPageRoute<T> {
   MyCustomRoute(
       {required WidgetBuilder builder, required RouteSettings settings})
       : super(builder: builder, settings: settings);
+  final begin = Offset(0.0, 1.0);
+  final end = Offset.zero;
+  final curve = Curves.ease;
 
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
-    return FadeTransition(opacity: animation, child: child);
+    var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+    return SlideTransition(position: animation.drive(tween), child: child);
   }
 }

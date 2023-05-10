@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:news/constants/colors.dart';
+import 'package:news/constants/route_name.dart';
 import 'package:news_api_flutter_package/model/article.dart';
 
 class NewsWidget extends StatelessWidget {
@@ -16,20 +16,22 @@ class NewsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, RouteNames.newsDetails,
+            arguments: article);
+      },
       child: Stack(
         children: [
           Positioned(
             bottom: 10.0,
             child: Container(
-              padding: const EdgeInsets.all(10),
               alignment: Alignment.bottomCenter,
-              width: width,
+              width: MediaQuery.of(context).size.width,
               height: height / 6,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.transparent, Colors.black.withOpacity(0.9)],
+                  colors: [AppColors.black26, Colors.black.withOpacity(0.9)],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
@@ -55,7 +57,8 @@ class NewsWidget extends StatelessWidget {
           ),
           Container(
             height: height / 1.8,
-            margin: const EdgeInsets.only(bottom: 70, top: 10, left: 30, right: 30),
+            margin:
+                const EdgeInsets.only(bottom: 80, top: 10, left: 30, right: 30),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16.0),
               boxShadow: [
@@ -68,12 +71,15 @@ class NewsWidget extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16.0),
-              child: Image.network(
-                article.urlToImage ??
-                    'https://via.placeholder.com/150x150.png?text=No+Image',
-                height: 300.0,
-                width: 300,
-                fit: BoxFit.cover,
+              child: Hero(
+                tag: "image",
+                child: Image.network(
+                  article.urlToImage ??
+                      'https://via.placeholder.com/150x150.png?text=No+Image',
+                  height: 300.0,
+                  width: 300,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),

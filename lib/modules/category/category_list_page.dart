@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news/constants/colors.dart';
+import 'package:news/constants/route_name.dart';
 
 class CategoryPage extends StatelessWidget {
   CategoryPage({super.key});
@@ -24,7 +25,7 @@ class CategoryPage extends StatelessWidget {
     AppColors.purple,
     AppColors.black38,
     AppColors.teal,
-    AppColors.greenAccent,
+    AppColors.blueGrey,
   ];
 
   @override
@@ -46,15 +47,18 @@ class CategoryPage extends StatelessWidget {
             border: Border.all(color: AppColors.black, width: 3)),
         child: GridView.builder(
             itemCount: 8,
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2),
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, "/categoryDetails",
-                        arguments: categories[index]);
+                    Navigator.pushNamed(
+                      context,
+                      RouteNames.categoryDetails,
+                      arguments: categories[index],
+                    );
                   },
                   child: Container(
                     width: 150,
