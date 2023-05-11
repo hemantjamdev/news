@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:news/modules/sources/news_source_bloc.dart';
 
 class NewsSourcesPage extends StatelessWidget {
+  const NewsSourcesPage({super.key});
+
   String getLogo(String name) {
     return "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/$name.png/1024px-$name.png";
   }
@@ -30,7 +31,7 @@ class NewsSourcesPage extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SvgPicture.network(
+                            Image.network(
                               getLogo(source.id.toString()),
                               height: 64,
                             ),
