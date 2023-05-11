@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news/API/api.dart';
 import 'package:news/modules/category/category_list_page.dart';
 import 'package:news/modules/headlines/headline_bloc.dart';
 import 'package:news/modules/headlines/headline_page.dart';
 import 'package:news/modules/internet/internet_bloc.dart';
+import 'package:news/modules/sources/news_sources_list_page.dart';
 import 'package:news/presentation/no_internet.dart';
+
+import '../modules/sources/news_source_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,7 +23,7 @@ class _HomePageState extends State<HomePage>
 
   @override
   void initState() {
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
     super.initState();
   }
 
@@ -29,13 +33,22 @@ class _HomePageState extends State<HomePage>
       builder: (context, InternetState state) {
         if (state is InternetSuccess) {
           return Scaffold(
+          /*  floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                API.getSourceList();
+              },
+            ),*/
             body: SafeArea(
               child: TabBarView(controller: tabController, children: [
                 BlocProvider<HeadlineBloc>(
                   create: (context) => HeadlineBloc(),
                   child: const HeadLinePage(),
                 ),
-                CategoryPage()
+                CategoryPage(),
+                BlocProvider<NewsSourceBloc>(
+                  create: (context) => NewsSourceBloc()..add(GetSources()),
+                  child: NewsSourcesPage(),
+                )
               ]),
             ),
             bottomNavigationBar: TabBar(
@@ -43,11 +56,13 @@ class _HomePageState extends State<HomePage>
               tabs: const [
                 Tab(
                   icon: Icon(Icons.home),
-                  child: Text("home"),
                 ),
                 Tab(
                   icon: Icon(Icons.category),
-                  child: Text("category"),
+                ),
+                Tab(
+                  icon: Icon(Icons.grid_view),
+                  // child: Text("category"),
                 ),
               ],
             ),

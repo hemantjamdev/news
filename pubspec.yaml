@@ -41,6 +41,8 @@ dependencies:
   lottie: ^2.3.2
   connectivity_plus: ^4.0.0
   webview_flutter: ^4.2.0
+  sizer: ^2.0.15
+  flutter_svg: ^0.22.0
 
 dev_dependencies:
   flutter_test:

@@ -7,7 +7,7 @@ class NewsLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ListView.builder(
+      child: PageView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: 5,
           itemBuilder: (context, int index) {

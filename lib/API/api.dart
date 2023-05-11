@@ -17,8 +17,8 @@ class API {
     );
   }
 
-  static Future getSourceList({required String cateName}) async {
-    return await newsAPI.getSources(language: "en", category: "in");
+  static Future getSourceList() async {
+    return await newsAPI.getSources( country: "in");
   }
 
   static Future getCategoryNews(String category) async {

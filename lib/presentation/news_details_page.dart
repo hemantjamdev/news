@@ -1,7 +1,7 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:news_api_flutter_package/model/article.dart';
+import 'package:sizer/sizer.dart';
 
 import '../constants/colors.dart';
 
@@ -21,7 +21,7 @@ class NewsDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    //Size size = MediaQuery.of(context).size;
     return Scaffold(
       key: navigatorKey,
       body: SafeArea(
@@ -32,8 +32,8 @@ class NewsDetails extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.all(5),
                 padding: const EdgeInsets.only(top: 70, left: 5, right: 5),
-                width: MediaQuery.of(context).size.width,
-                height: size.height / 2,
+                width: 100.w,
+                height: 50.h,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -98,34 +98,36 @@ class NewsDetails extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              height: size.height * 0.5,
-              margin: const EdgeInsets.only(
-                  bottom: 80, top: 10, left: 30, right: 30),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.5),
-                    blurRadius: 10.0,
-                    offset: const Offset(0, 10),
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16.0),
-                child: Hero(
-                  tag: "image",
-                  child: GestureDetector(
-                    onVerticalDragEnd: (drag) {
-                      Navigator.pop(context);
-                    },
-                    child: Image.network(
-                      article.urlToImage ??
-                          'https://via.placeholder.com/150x150.png?text=No+Image',
-                      height: 300.0,
-                      width: 300,
-                      fit: BoxFit.cover,
+            Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                height: 45.h,
+                width: 80.w,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.5),
+                      blurRadius: 10.0,
+                      offset: const Offset(0, 10),
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.0),
+                  child: Hero(
+                    tag: "image",
+                    child: GestureDetector(
+                      onVerticalDragEnd: (drag) {
+                        Navigator.pop(context);
+                      },
+                      child: Image.network(
+                        article.urlToImage ??
+                            'https://via.placeholder.com/150x150.png?text=No+Image',
+                       // height: 300.0,
+                        //width: 300,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),

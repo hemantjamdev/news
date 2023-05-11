@@ -53,7 +53,7 @@ class Search extends StatelessWidget {
                 ),
                 hintText: "Search News",
                 labelText: "Search News"),
-            onSubmitted:controller.text.isNotEmpty? onSearch:null,
+            onChanged: onSearch,
           ),
         ),
       ],

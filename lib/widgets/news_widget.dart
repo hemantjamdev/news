@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news/constants/colors.dart';
 import 'package:news/constants/route_name.dart';
 import 'package:news_api_flutter_package/model/article.dart';
+import 'package:sizer/sizer.dart';
 
 class NewsWidget extends StatelessWidget {
   final Article article;
@@ -24,61 +25,66 @@ class NewsWidget extends StatelessWidget {
       child: Stack(
         children: [
           Positioned(
-            bottom: 10.0,
+            bottom: 10,
             child: Container(
               alignment: Alignment.bottomCenter,
-              width: MediaQuery.of(context).size.width,
-              height: height / 6,
+              width: 100.w,
+              height: 20.h,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [AppColors.black26, Colors.black.withOpacity(0.9)],
+                  colors: [
+                    AppColors.black,
+                    Colors.black.withOpacity(0.7),
+                  ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
                 color: Colors.grey.withOpacity(0.4),
                 borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(40),
-                  topLeft: Radius.circular(40),
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10),
+                  topRight: Radius.circular(80),
+                  topLeft: Radius.circular(80),
+                  bottomLeft: Radius.circular(5),
+                  bottomRight: Radius.circular(5),
                 ),
               ),
               child: Text(
                 article.title ?? '',
-                style: const TextStyle(
+                style: TextStyle(
                   color: AppColors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 22.0,
+                  fontSize: 18.sp,
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
           ),
-          Container(
-            height: height / 1.8,
-            margin:
-                const EdgeInsets.only(bottom: 80, top: 10, left: 30, right: 30),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.5),
-                  blurRadius: 10.0,
-                  offset: const Offset(0, 10),
-                ),
-              ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16.0),
-              child: Hero(
-                tag: "image",
-                child: Image.network(
-                  article.urlToImage ??
-                      'https://via.placeholder.com/150x150.png?text=No+Image',
-                  height: 300.0,
-                  width: 300,
-                  fit: BoxFit.cover,
+          Center(
+            child: Container(
+              height: 60.h,
+              width: 80.w,
+              margin: EdgeInsets.only(bottom: 80.sp, top: 10.sp),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.5),
+                    blurRadius: 10.0,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16.0),
+                child: Hero(
+                  tag: "image",
+                  child: Image.network(
+                    article.urlToImage ??
+                        'https://via.placeholder.com/150x150.png?text=No+Image',
+                    //height: 300.0,
+                    //  width: ,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
