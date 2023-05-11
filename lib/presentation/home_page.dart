@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news/API/api.dart';
 import 'package:news/modules/category/category_list_page.dart';
 import 'package:news/modules/headlines/headline_bloc.dart';
 import 'package:news/modules/headlines/headline_page.dart';
 import 'package:news/modules/internet/internet_bloc.dart';
+import 'package:news/modules/notification/notification.dart';
 import 'package:news/modules/sources/news_sources_list_page.dart';
 import 'package:news/presentation/no_internet.dart';
 
@@ -33,21 +33,17 @@ class _HomePageState extends State<HomePage>
       builder: (context, InternetState state) {
         if (state is InternetSuccess) {
           return Scaffold(
-          /*  floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                API.getSourceList();
-              },
-            ),*/
+
             body: SafeArea(
               child: TabBarView(controller: tabController, children: [
                 BlocProvider<HeadlineBloc>(
-                  create: (context) => HeadlineBloc(),
+                  create: (context) => HeadlineBloc()..add(FetchHeadlines()),
                   child: const HeadLinePage(),
                 ),
                 CategoryPage(),
                 BlocProvider<NewsSourceBloc>(
                   create: (context) => NewsSourceBloc()..add(GetSources()),
-                  child: NewsSourcesPage(),
+                  child: const NewsSourcesPage(),
                 )
               ]),
             ),

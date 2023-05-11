@@ -13,6 +13,7 @@ class HeadlineBloc extends Bloc<HeadlineEvent, HeadlineState> {
   List<Article> newsList = <Article>[];
 
   HeadlineBloc() : super(HeadlineInitial()) {
+
     on<HeadlineEvent>(
       (event, emit) async {
         if (event is FetchHeadlines) {

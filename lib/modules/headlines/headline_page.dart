@@ -12,8 +12,6 @@ class HeadLinePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<HeadlineBloc>(context)
-        .add(FetchHeadlines());
     return Scaffold(
       appBar: AppBar(title: const Text("Top Headlines")),
       body: Column(

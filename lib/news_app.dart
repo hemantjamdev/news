@@ -5,12 +5,14 @@ import 'package:news/routes.dart';
 import 'package:sizer/sizer.dart';
 
 class NewsApp extends StatelessWidget {
-  const NewsApp({Key? key}) : super(key: key);
+  NewsApp({Key? key}) : super(key: key);
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, deviceType) {
       return MaterialApp(
+          navigatorKey: navigatorKey,
           title: Strings.title,
           onGenerateRoute: Routes.onRouteGenerate,
           debugShowCheckedModeBanner: false,
