@@ -6,7 +6,13 @@ class HeadlineProvider {
   List<Article> newsList = <Article>[];
 
   Future<List<Article>> getHeadLine() async {
-    if (newsList.isNotEmpty) {
+    NotificationServices().showNotification(
+      id: 1,
+      title: "newsList.first.title.toString()",
+      body: "newsList.first.description.toString()",
+      payload: "",
+    );
+    /*if (newsList.isNotEmpty) {
       List<Article> oldList = newsList;
       newsList = await API.getNews();
       if (newsList.first.title != oldList.first.title) {
@@ -18,9 +24,9 @@ class HeadlineProvider {
         );
       }
       return newsList;
-    } else {
+    } else {*/
       return newsList = await API.getNews();
-    }
+   // }
   }
 
   Future<List<Article>> search(String query, String category) async {
